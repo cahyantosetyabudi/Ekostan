@@ -118,6 +118,7 @@ public class FormLogin extends javax.swing.JFrame {
         
         MainForm mainForm = new MainForm();
         mainForm.setVisible(true);
+        mainForm.setLocationRelativeTo(null);
         dispose();
     }//GEN-LAST:event_buttonLoginActionPerformed
 
@@ -151,7 +152,9 @@ public class FormLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormLogin().setVisible(true);
+                FormLogin formLogin = new FormLogin();
+                formLogin.setLocationRelativeTo(null);
+                formLogin.setVisible(true);
             }
         });
     }
