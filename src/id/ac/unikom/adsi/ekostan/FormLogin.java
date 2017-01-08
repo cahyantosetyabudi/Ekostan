@@ -115,7 +115,10 @@ public class FormLogin extends javax.swing.JFrame {
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         String userName = textFieldUserName.getText();
         String password = String.valueOf(passwordField.getPassword());
-
+        
+        MainForm mainForm = new MainForm();
+        mainForm.setVisible(true);
+        dispose();
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     /**
