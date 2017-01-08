@@ -69,6 +69,8 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JTextField" name="textFieldUserName">
+    </Component>
     <Component class="javax.swing.JPasswordField" name="passwordField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
@@ -102,7 +104,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="412" max="32767" attributes="0"/>
+                  <EmptySpace pref="423" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -133,7 +135,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="textFieldUserName">
-    </Component>
   </SubComponents>
 </Form>
