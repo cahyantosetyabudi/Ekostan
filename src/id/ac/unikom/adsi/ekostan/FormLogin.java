@@ -5,6 +5,11 @@
  */
 package id.ac.unikom.adsi.ekostan;
 
+import id.ac.unikom.adsi.ekostan.dao.PemilikDAO;
+import id.ac.unikom.adsi.ekostan.daoimpl.PemilikDAOImpl;
+import id.ac.unikom.adsi.ekostan.entity.Pemilik;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Zmart D3viL
@@ -116,10 +121,17 @@ public class FormLogin extends javax.swing.JFrame {
         String userName = textFieldUserName.getText();
         String password = String.valueOf(passwordField.getPassword());
         
-        MainForm mainForm = new MainForm();
-        mainForm.setVisible(true);
-        mainForm.setLocationRelativeTo(null);
-        dispose();
+        PemilikDAO pemilikDAO = new PemilikDAOImpl();
+        Pemilik pemilik = pemilikDAO.login(userName, password);
+        
+        if (pemilik == null) {
+            JOptionPane.showMessageDialog(this, "Periksa username dan password anda");
+        } else {
+            MainForm mainForm = new MainForm();
+            mainForm.setVisible(true);
+            mainForm.setLocationRelativeTo(null);
+            dispose();
+        }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     /**
