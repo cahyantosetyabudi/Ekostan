@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Jan 08, 2017 at 03:03 PM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `ekostan`
 --
@@ -23,7 +5,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penyewa`
+-- Struktur dari tabel `kamar`
+--
+
+CREATE TABLE `kamar` (
+  `no_kamar` varchar(5) NOT NULL,
+  `harga` varchar(10) NOT NULL,
+  `status` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kamar`
+--
+
+INSERT INTO `kamar` (`no_kamar`, `harga`, `status`) VALUES
+('12345', '5000', 'Terisi'),
+('12346', '1000', 'Kosong');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `penyewa`
 --
 
 CREATE TABLE `penyewa` (
@@ -35,7 +37,7 @@ CREATE TABLE `penyewa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `penyewa`
+-- Dumping data untuk tabel `penyewa`
 --
 
 INSERT INTO `penyewa` (`id_penyewa`, `nama_penyewa`, `jenis_kelamin`, `alamat`, `no_telp`) VALUES
@@ -47,7 +49,29 @@ INSERT INTO `penyewa` (`id_penyewa`, `nama_penyewa`, `jenis_kelamin`, `alamat`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `penyewaan`
+--
+
+CREATE TABLE `penyewaan` (
+  `no_transaksi` varchar(8) NOT NULL,
+  `id_penyewa` int(11) NOT NULL,
+  `nama_penyewa` varchar(30) NOT NULL,
+  `no_kamar` varchar(5) NOT NULL,
+  `tanggal_sewa` date NOT NULL,
+  `total_bayar` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `penyewaan`
+--
+
+INSERT INTO `penyewaan` (`no_transaksi`, `id_penyewa`, `nama_penyewa`, `no_kamar`, `tanggal_sewa`, `total_bayar`) VALUES
+('S2017001', 1, 'saya sendiri', '12345', '2017-01-05', '5000');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -57,7 +81,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`) VALUES
@@ -68,10 +92,24 @@ INSERT INTO `user` (`id`, `username`, `password`) VALUES
 --
 
 --
+-- Indexes for table `kamar`
+--
+ALTER TABLE `kamar`
+  ADD PRIMARY KEY (`no_kamar`);
+
+--
 -- Indexes for table `penyewa`
 --
 ALTER TABLE `penyewa`
   ADD PRIMARY KEY (`id_penyewa`);
+
+--
+-- Indexes for table `penyewaan`
+--
+ALTER TABLE `penyewaan`
+  ADD PRIMARY KEY (`no_transaksi`),
+  ADD KEY `id_penyewa` (`id_penyewa`),
+  ADD KEY `no_kamar` (`no_kamar`);
 
 --
 -- Indexes for table `user`
@@ -88,6 +126,17 @@ ALTER TABLE `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `penyewaan`
+--
+ALTER TABLE `penyewaan`
+  ADD CONSTRAINT `fk_penyewaan_kamar` FOREIGN KEY (`no_kamar`) REFERENCES `kamar` (`no_kamar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_penyewaan_penyewa` FOREIGN KEY (`id_penyewa`) REFERENCES `penyewa` (`id_penyewa`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
