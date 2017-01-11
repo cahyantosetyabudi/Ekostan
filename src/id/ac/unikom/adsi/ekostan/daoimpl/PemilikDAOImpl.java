@@ -43,7 +43,6 @@ public class PemilikDAOImpl implements PemilikDAO {
             ResultSet result = state.executeQuery();
             if (result != null && result.next()) {
                 pemilik = new Pemilik();
-                pemilik.setId(result.getInt(1));
             }
 
         } catch (SQLException ex) {

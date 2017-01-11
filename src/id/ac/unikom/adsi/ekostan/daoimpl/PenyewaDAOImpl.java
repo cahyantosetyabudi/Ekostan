@@ -97,6 +97,7 @@ public class PenyewaDAOImpl implements PenyewaDAO {
             state.setString(2, namaPenyewa);
             state.setString(3, jenisKelamin);
             state.setString(4, alamat);
+            state.setString(5, noTelp);
             
             int result = state.executeUpdate();
             return result > 0;

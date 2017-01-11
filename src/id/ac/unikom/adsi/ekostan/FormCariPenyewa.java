@@ -98,7 +98,7 @@ public class FormCariPenyewa extends javax.swing.JFrame {
 
         jLabel2.setText("Cari Nama");
 
-        buttonPilih.setText("Hapus");
+        buttonPilih.setText("Hapus Penyewa");
         buttonPilih.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hapusActionPerformed(evt);
@@ -133,27 +133,28 @@ public class FormCariPenyewa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(497, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(buttonPilih1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonPilih3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(buttonPilih1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonPilih3)
+                        .addGap(228, 228, 228))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(buttonPilih, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel1)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonPilih))
                     .addContainerGap(29, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -236,6 +237,16 @@ public class FormCariPenyewa extends javax.swing.JFrame {
 
     private void buttonPilih3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilih3ActionPerformed
         // TODO add your handling code here:
+        if(tableAnggota.getSelectedRow()>=0){
+            int baris = tableAnggota.getSelectedRow();
+            penyewa = arrayPenyewa.get(baris);
+            FormUbahPenyewa fp = new FormUbahPenyewa(this, true, penyewa);
+            fp.setLocationRelativeTo(null);
+            fp.setVisible(true);
+            getData(null);
+        }else{
+            JOptionPane.showMessageDialog(this, "Pilih Item Terlebh Dahulu.");
+        }
     }//GEN-LAST:event_buttonPilih3ActionPerformed
 
     /**
