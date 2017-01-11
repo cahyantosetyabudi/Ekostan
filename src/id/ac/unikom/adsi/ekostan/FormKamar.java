@@ -378,6 +378,14 @@ public final class FormKamar extends javax.swing.JDialog {
         int kode_buku1;
         no_kamar = text_no_kamar.getText();
         harga_sewa = text_harga.getText();
+        String sub_nomor = no_kamar.substring(0,1);
+        String sub_nol = no_kamar.substring(1,2);
+        String sub_nol1 = no_kamar.substring(2,3);
+        String sub_nol2 = no_kamar.substring(3,4);
+        String sub_nol3 = no_kamar.substring(4,5);
+        int panjang = no_kamar.length();
+        
+        
         if(radio_terisi.isSelected()){
             status = radio_terisi.getText();
         }else{
@@ -385,7 +393,25 @@ public final class FormKamar extends javax.swing.JDialog {
         }
         Connection conn = DatabaseConnectivity.getConnection();
         
-        if (no_kamar.compareTo("")==0){
+        if(sub_nomor.compareTo("K")!=0){
+            JOptionPane.showMessageDialog(null, "Format NOMOR KAMAR salah!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            text_no_kamar.requestFocus();
+        }else if(panjang<5 || panjang>5){
+            JOptionPane.showMessageDialog(null, "Format NOMOR KAMAR salah!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            text_no_kamar.requestFocus();
+        }else if(sub_nol.compareTo("0")!=0 && sub_nol.compareTo("1")!=0 && sub_nol.compareTo("2")!=0 && sub_nol.compareTo("3")!=0 && sub_nol.compareTo("4")!=0 && sub_nol.compareTo("5")!=0 && sub_nol.compareTo("6")!=0 && sub_nol.compareTo("7")!=0 && sub_nol.compareTo("8")!=0 && sub_nol.compareTo("9")!=0){   
+            JOptionPane.showMessageDialog(null, "Format NOMOR KAMAR salah!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            text_no_kamar.requestFocus();
+        }else if(sub_nol1.compareTo("0")!=0 && sub_nol1.compareTo("1")!=0 && sub_nol1.compareTo("2")!=0 && sub_nol1.compareTo("3")!=0 && sub_nol1.compareTo("4")!=0 && sub_nol1.compareTo("5")!=0 && sub_nol1.compareTo("6")!=0 && sub_nol1.compareTo("7")!=0 && sub_nol1.compareTo("8")!=0 && sub_nol1.compareTo("9")!=0){   
+            JOptionPane.showMessageDialog(null, "Format NOMOR KAMAR salah!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            text_no_kamar.requestFocus();
+        }else if(sub_nol2.compareTo("0")!=0 && sub_nol2.compareTo("1")!=0 && sub_nol2.compareTo("2")!=0 && sub_nol2.compareTo("3")!=0 && sub_nol2.compareTo("4")!=0 && sub_nol2.compareTo("5")!=0 && sub_nol2.compareTo("6")!=0 && sub_nol2.compareTo("7")!=0 && sub_nol2.compareTo("8")!=0 && sub_nol2.compareTo("9")!=0){   
+            JOptionPane.showMessageDialog(null, "Format NOMOR KAMAR salah!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            text_no_kamar.requestFocus();
+        }else if(sub_nol3.compareTo("0")!=0 && sub_nol3.compareTo("1")!=0 && sub_nol3.compareTo("2")!=0 && sub_nol3.compareTo("3")!=0 && sub_nol3.compareTo("4")!=0 && sub_nol3.compareTo("5")!=0 && sub_nol3.compareTo("6")!=0 && sub_nol3.compareTo("7")!=0 && sub_nol3.compareTo("8")!=0 && sub_nol3.compareTo("9")!=0){   
+            JOptionPane.showMessageDialog(null, "Format NOMOR KAMAR salah!","Informasi", JOptionPane.INFORMATION_MESSAGE);
+            text_no_kamar.requestFocus();
+        }else if (no_kamar.compareTo("")==0){
             JOptionPane.showMessageDialog(null, "Silahkan isi NOMOR KAMAR!","Informasi", JOptionPane.INFORMATION_MESSAGE);
             text_no_kamar.requestFocus();
         }else if (harga_sewa.compareTo("")==0){

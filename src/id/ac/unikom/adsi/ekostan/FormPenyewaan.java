@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.Calendar;
 
 /**
  *
@@ -117,6 +118,8 @@ public final class FormPenyewaan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        text_dummy = new javax.swing.JTextField();
+        text_dummy1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -340,11 +343,12 @@ public final class FormPenyewaan extends javax.swing.JDialog {
                                     .addComponent(text_id_penyewa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel17)
                                     .addComponent(text_no_kamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16)
-                                    .addComponent(text_kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel16)
+                                        .addComponent(text_kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(text_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,7 +389,7 @@ public final class FormPenyewaan extends javax.swing.JDialog {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -479,13 +483,12 @@ public final class FormPenyewaan extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -494,7 +497,7 @@ public final class FormPenyewaan extends javax.swing.JDialog {
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -511,7 +514,7 @@ public final class FormPenyewaan extends javax.swing.JDialog {
 
     private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
         // TODO add your handling code here:
-        String no_transaksi,nama_penyewa,id_penyewa,no_kamar,status,harga_sewa,uang_bayar,kembalian;
+        String no_transaksi,nama_penyewa,nama_penyewa1 = null,nama_penyewa2 = null,id_penyewa,id_penyewa1 = null,id_penyewa2 = null,no_kamar,status,harga_sewa,uang_bayar,kembalian,cari;
         java.util.Date tanggal_sewa;
         no_transaksi = text_no_transaksi.getText();
         id_penyewa = text_id_penyewa.getText();
@@ -523,8 +526,30 @@ public final class FormPenyewaan extends javax.swing.JDialog {
         uang_bayar = text_uang_bayar.getText();
         kembalian = text_kembalian.getText();
         Connection conn = DatabaseConnectivity.getConnection();
-        if(status.compareTo("Terisi")==0){
-            JOptionPane.showMessageDialog(null, "Maaf, kamar telah terisi! (silakan cari kamar yg lain)","Informasi", JOptionPane.INFORMATION_MESSAGE);
+        cari = text_id_penyewa.getText();
+        if("".equals(cari)){
+             cari="#";
+        }
+        try{           
+            String sql="Select id_penyewa,nama_penyewa from penyewaan where "
+                    + "id_penyewa='"+cari+"' "
+                    + "order by id_penyewa asc";
+            java.sql.Statement stmt=conn.createStatement();
+            java.sql.ResultSet rslt=stmt.executeQuery(sql);
+            while(rslt.next()){
+                id_penyewa1 = rslt.getString("id_penyewa");
+                id_penyewa2=id_penyewa1;
+                nama_penyewa1 =rslt.getString("nama_penyewa");
+                nama_penyewa2=nama_penyewa1;
+            }          
+            text_dummy.setText(id_penyewa2);
+            text_dummy1.setText(nama_penyewa2);
+        }catch(SQLException | HeadlessException ex){
+        }
+        String id_penyewa3 = text_dummy.getText();
+        String nama_penyewa3 = text_dummy1.getText();
+        if(status.compareTo("Terisi")==0 && id_penyewa.compareTo(id_penyewa3)!=0){
+            JOptionPane.showMessageDialog(null, "Maaf, kamar telah terisi oleh seseorang ! (silakan cari kamar yg lain)","Informasi", JOptionPane.INFORMATION_MESSAGE);
             text_no_kamar.setText("");
             text_status.setText("");
             text_harga.setText("");
@@ -716,6 +741,8 @@ public final class FormPenyewaan extends javax.swing.JDialog {
 
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
         // TODO add your handling code here:
+        tampil_tabel_penyewaan();
+        tampil_tabel_cari_penyewaan();
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
@@ -726,13 +753,19 @@ public final class FormPenyewaan extends javax.swing.JDialog {
         String kosong = null;
         Connection conn = DatabaseConnectivity.getConnection();
         try {
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            tahun = String.valueOf(year);
             String sql = "select no_transaksi,year(now()) as tahun from penyewaan order by no_transaksi asc";
             java.sql.Statement stat = conn.createStatement();
             java.sql.ResultSet hasil = stat.executeQuery(sql);
             while (hasil.next()){
                 String nomor_transaksi = hasil.getString("no_transaksi");
                 nomor_transaksi1 = nomor_transaksi;
-                tahun = hasil.getString("tahun");
+                String tahun1 = hasil.getString("tahun");
+            }
+            if(nomor_transaksi1==null){
+                nomor_transaksi1="S0000000";
             }
             String sub_nomor = nomor_transaksi1.substring(5,8);
             int sub_nomor1 = Integer.parseInt(sub_nomor);
@@ -931,6 +964,8 @@ public final class FormPenyewaan extends javax.swing.JDialog {
     private javax.swing.JTable tabel_penyewaan;
     private javax.swing.JButton tambah;
     private javax.swing.JTextField text_cari_penyewaan;
+    private javax.swing.JTextField text_dummy;
+    private javax.swing.JTextField text_dummy1;
     private javax.swing.JTextField text_harga;
     private javax.swing.JTextField text_id_penyewa;
     private javax.swing.JTextField text_kembalian;

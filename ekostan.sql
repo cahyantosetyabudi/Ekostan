@@ -19,8 +19,8 @@ CREATE TABLE `kamar` (
 --
 
 INSERT INTO `kamar` (`no_kamar`, `harga`, `status`) VALUES
-('12345', '5000', 'Terisi'),
-('12346', '1000', 'Kosong');
+('K0001', '1000', 'Kosong'),
+('K0002', '600000', 'Kosong');
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,10 @@ CREATE TABLE `penyewaan` (
 --
 
 INSERT INTO `penyewaan` (`no_transaksi`, `id_penyewa`, `nama_penyewa`, `no_kamar`, `tanggal_sewa`, `total_bayar`) VALUES
-('S2017001', 1, 'saya sendiri', '12345', '2017-01-05', '5000');
+('S2017001', 3, 'arif', 'K0002', '2017-01-14', '600000'),
+('S2017002', 3, 'arif', 'K0002', '2017-01-28', '600000'),
+('S2017003', 1, 'budi', 'K0001', '2017-01-13', '1000'),
+('S2017004', 3, 'arif', 'K0002', '2017-01-21', '600000');
 
 -- --------------------------------------------------------
 
