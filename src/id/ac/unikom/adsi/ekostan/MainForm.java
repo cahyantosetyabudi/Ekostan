@@ -125,14 +125,14 @@ public class MainForm extends javax.swing.JFrame {
         jLabel6.setText("All Menu's");
 
         jPanel4.setPreferredSize(new java.awt.Dimension(110, 36));
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                penyewaMouseClicked(evt);
-            }
-        });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Data Penyewa");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -173,11 +173,6 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         jPanel6.setPreferredSize(new java.awt.Dimension(110, 36));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                penyewaanMouseClicked(evt);
-            }
-        });
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Penyewaan");
@@ -205,11 +200,6 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         jPanel7.setPreferredSize(new java.awt.Dimension(110, 36));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pengosonganMouseClicked(evt);
-            }
-        });
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Pengosongan");
@@ -234,11 +224,6 @@ public class MainForm extends javax.swing.JFrame {
         );
 
         jPanel8.setPreferredSize(new java.awt.Dimension(110, 36));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                laporanMouseClicked(evt);
-            }
-        });
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Laporan");
@@ -403,14 +388,11 @@ public class MainForm extends javax.swing.JFrame {
 
     private void kamarLabelClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kamarLabelClicked
         // TODO add your handling code here:
-        FormKamar formKamar = new FormKamar(this, rootPaneCheckingEnabled);
-        formKamar.setLocationRelativeTo(null);
-        formKamar.setVisible(true);
+        new FormKamar(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_kamarLabelClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
@@ -444,40 +426,22 @@ public class MainForm extends javax.swing.JFrame {
         formLaporan.setVisible(true);
     }//GEN-LAST:event_laporanMouseClicked
 
-    private void penyewaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_penyewaMouseClicked
-        // TODO add your handling code here:
-        FormCariPenyewa formCariPenyewa = new FormCariPenyewa();
-        formCariPenyewa.setLocationRelativeTo(null);
-        formCariPenyewa.setVisible(true);
-    }//GEN-LAST:event_penyewaMouseClicked
-
-    private void penyewaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_penyewaanMouseClicked
-        // TODO add your handling code here:
-        FormPenyewaan formPenyewaan = new FormPenyewaan(this, rootPaneCheckingEnabled);
-        formPenyewaan.setLocationRelativeTo(null);
-        formPenyewaan.setVisible(true);
-    }//GEN-LAST:event_penyewaanMouseClicked
-
-    private void pengosonganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pengosonganMouseClicked
-        // TODO add your handling code here:
-        FormPengosongan formPengosongan = new FormPengosongan(this, rootPaneCheckingEnabled);
-        formPengosongan.setLocationRelativeTo(null);
-        formPengosongan.setVisible(true);
-    }//GEN-LAST:event_pengosonganMouseClicked
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        FormPenyewaan formPenyewaan = new FormPenyewaan(this, rootPaneCheckingEnabled);
-        formPenyewaan.setLocationRelativeTo(null);
-        formPenyewaan.setVisible(true);
+        new FormPenyewaan(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        FormPengosongan formPengosongan = new FormPengosongan(this, rootPaneCheckingEnabled);
-        formPengosongan.setLocationRelativeTo(null);
-        formPengosongan.setVisible(true);
+        new FormPengosongan(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        FormCariPenyewa formCariPenyewa = new FormCariPenyewa();
+        formCariPenyewa.setLocationRelativeTo(null);
+        formCariPenyewa.setVisible(true);
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
      * @param args the command line arguments
