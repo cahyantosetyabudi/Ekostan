@@ -10,6 +10,7 @@ import id.ac.unikom.adsi.ekostan.daoimpl.PenyewaDAOImpl;
 import id.ac.unikom.adsi.ekostan.entity.Penyewa;
 import id.ac.unikom.adsi.ekostan.tablemodel.PenyewaTM;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,10 @@ public class FormCariPenyewa extends javax.swing.JFrame {
     
     private Penyewa penyewa;
     private ArrayList<Penyewa> arrayPenyewa;
+
+    private FormCariPenyewa(JFrame jFrame, boolean b) {
+        initComponents();
+    }
     
     public Penyewa getPenyewa() {
         return penyewa;
@@ -76,7 +81,7 @@ public class FormCariPenyewa extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tableAnggota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
