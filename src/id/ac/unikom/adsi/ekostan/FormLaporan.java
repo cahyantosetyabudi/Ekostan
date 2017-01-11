@@ -5,7 +5,20 @@
  */
 package id.ac.unikom.adsi.ekostan;
 
+import id.ac.unikom.adsi.ekostan.dao.PenyewaDAO;
+import id.ac.unikom.adsi.ekostan.daoimpl.PenyewaDAOImpl;
+import id.ac.unikom.adsi.ekostan.entity.Penyewa;
+import id.ac.unikom.adsi.ekostan.export.ExcelExporter;
+import id.ac.unikom.adsi.ekostan.tablemodel.PenyewaTM;
 import java.awt.Frame;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +29,51 @@ public class FormLaporan extends javax.swing.JDialog {
     public FormLaporan(Frame owner, boolean modal) {
         super(owner, modal);
         initComponents();
-        
+        getData();
     }
     
+        private void getData() {
+        //set table penyewa
+            PenyewaDAO penyewaDAO = new PenyewaDAOImpl();
+        ArrayList<Penyewa> listPenyewa = penyewaDAO.getPenyewa();
+        PenyewaTM penyewaTM = new PenyewaTM();
+        penyewaTM.setArrayPenyewa(listPenyewa);
+
+        tablePenyewa.setModel(penyewaTM);
+
+        //set table kamar
+//        PegawaiDAO daoPegawai = new PegawaiDAOImpl();
+//        ArrayList<Pegawai> listPegawai = daoPegawai.getPegawai();
+//        PegawaiTM tmPegawai = new PegawaiTM();
+//        tmPegawai.setArrayPegawai(listPegawai);
+//
+//        tablePegawai.setModel(tmPegawai);
+
+//        //set table Transaksi
+//        PeminjamanDAO daoPeminjaman = new PeminjamanDAOImpl();
+//        ArrayList<Peminjaman> listPeminjaman = daoPeminjaman.getPeminjaman(null);
+//        PeminjamanTM tmPeminjaman = new PeminjamanTM();
+//        tmPeminjaman.setArrayPeminjaman(listPeminjaman);
+//
+//        tableTransaksi.setModel(tmPeminjaman);
+//
+//        //set table Transaksi
+//        BukuDAO daoBuku = new BukuDAOImpl();
+//        ArrayList<Buku> listBuku = daoBuku.getBuku(null);
+//        BukuTM tmBuku = new BukuTM();
+//        tmBuku.setArrayBuku(listBuku);
+//
+//        tableBuku.setModel(tmBuku);
+//
+//        PengembalianDAO daoPengembalian = new PengembalianDAOImpl();
+//        ArrayList<Pengembalian> listPengembalian = daoPengembalian.getPengambilan(null);
+//        PengembalianTM tmPengembalian = new PengembalianTM();
+//        tmPengembalian.setArrayPengembalian(listPengembalian);
+//
+//        tablePengembalian.setModel(tmPengembalian);
+
+    }
+        
     /**
      * Creates new form FormLaporan 
 
@@ -36,22 +91,22 @@ public class FormLaporan extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableBuku = new javax.swing.JTable();
-        buttonBuku = new javax.swing.JButton();
+        tablePenyewa = new javax.swing.JTable();
+        buttonPenyewa = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableTransaksi = new javax.swing.JTable();
+        tablePenyewaan = new javax.swing.JTable();
         buttonPeminjam = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tableAnggota = new javax.swing.JTable();
+        tableKamar = new javax.swing.JTable();
         buttonAnggota = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tableBuku.setModel(new javax.swing.table.DefaultTableModel(
+        tablePenyewa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,12 +117,17 @@ public class FormLaporan extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tableBuku);
+        jScrollPane2.setViewportView(tablePenyewa);
 
-        buttonBuku.setText("Export Penyewa to Excel");
-        buttonBuku.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonPenyewa.setText("Export Penyewa to Excel");
+        buttonPenyewa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonBukuexportMouseClikced(evt);
+                exportMouseClicked(evt);
+            }
+        });
+        buttonPenyewa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPenyewaActionPerformed(evt);
             }
         });
 
@@ -78,7 +138,7 @@ public class FormLaporan extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonBuku)
+                .addComponent(buttonPenyewa)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -86,13 +146,13 @@ public class FormLaporan extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonBuku)
+                .addComponent(buttonPenyewa)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Penyewa", jPanel1);
 
-        tableTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+        tablePenyewaan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -103,7 +163,7 @@ public class FormLaporan extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tableTransaksi);
+        jScrollPane3.setViewportView(tablePenyewaan);
 
         buttonPeminjam.setText("Export Penyewaan to Excel");
         buttonPeminjam.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,7 +192,7 @@ public class FormLaporan extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Penyewaan", jPanel2);
 
-        tableAnggota.setModel(new javax.swing.table.DefaultTableModel(
+        tableKamar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -143,7 +203,7 @@ public class FormLaporan extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(tableAnggota);
+        jScrollPane4.setViewportView(tableKamar);
 
         buttonAnggota.setText("Export Kamar to Excel");
         buttonAnggota.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -222,9 +282,23 @@ public class FormLaporan extends javax.swing.JDialog {
 
     }//GEN-LAST:event_buttonPeminjamexportMouseClikced
 
-    private void buttonBukuexportMouseClikced(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonBukuexportMouseClikced
+    private void exportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportMouseClicked
+        String timeExport = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+        if (evt.getSource() == buttonPenyewa) {
+            try {
+                ExcelExporter exp = new ExcelExporter();
+                exp.exportTable(tablePenyewa, new File("D:/DataPenyewa.xls"), "DATA PENYEWA EKOSTAN", timeExport);
+                JOptionPane.showMessageDialog(this, "File Location in D:/DataPenyewa.xls");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Try Again, File Excel Has Opened");
+                Logger.getLogger(FormLaporan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_exportMouseClicked
 
-    }//GEN-LAST:event_buttonBukuexportMouseClikced
+    private void buttonPenyewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPenyewaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPenyewaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,8 +344,8 @@ public class FormLaporan extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAnggota;
-    private javax.swing.JButton buttonBuku;
     private javax.swing.JButton buttonPeminjam;
+    private javax.swing.JButton buttonPenyewa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -281,8 +355,8 @@ public class FormLaporan extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tableAnggota;
-    private javax.swing.JTable tableBuku;
-    private javax.swing.JTable tableTransaksi;
+    private javax.swing.JTable tableKamar;
+    private javax.swing.JTable tablePenyewa;
+    private javax.swing.JTable tablePenyewaan;
     // End of variables declaration//GEN-END:variables
 }
