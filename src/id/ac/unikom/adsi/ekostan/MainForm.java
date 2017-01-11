@@ -333,9 +333,19 @@ public class MainForm extends javax.swing.JFrame {
         jMenu3.setText("Transaksi");
 
         jMenuItem4.setText("Penyewaan");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
 
         jMenuItem5.setText("Pengosongan");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
@@ -454,6 +464,20 @@ public class MainForm extends javax.swing.JFrame {
         formPengosongan.setLocationRelativeTo(null);
         formPengosongan.setVisible(true);
     }//GEN-LAST:event_pengosonganMouseClicked
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        FormPenyewaan formPenyewaan = new FormPenyewaan(this, rootPaneCheckingEnabled);
+        formPenyewaan.setLocationRelativeTo(null);
+        formPenyewaan.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        FormPengosongan formPengosongan = new FormPengosongan(this, rootPaneCheckingEnabled);
+        formPengosongan.setLocationRelativeTo(null);
+        formPengosongan.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
