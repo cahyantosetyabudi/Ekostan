@@ -5,7 +5,10 @@
  */
 package id.ac.unikom.adsi.ekostan;
 
+import id.ac.unikom.adsi.ekostan.dao.PenyewaDAO;
+import id.ac.unikom.adsi.ekostan.daoimpl.PenyewaDAOImpl;
 import id.ac.unikom.adsi.ekostan.entity.Penyewa;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,7 +65,7 @@ public class FormUbahPenyewa extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel5.setBackground(new java.awt.Color(0, 204, 204));
 
@@ -88,6 +91,7 @@ public class FormUbahPenyewa extends javax.swing.JDialog {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        fieldIdPenyewa.setEditable(false);
         fieldIdPenyewa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldIdPenyewaActionPerformed(evt);
@@ -188,10 +192,6 @@ public class FormUbahPenyewa extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldIdPenyewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdPenyewaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldIdPenyewaActionPerformed
-
     private void fieldNamaPenyewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNamaPenyewaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldNamaPenyewaActionPerformed
@@ -202,12 +202,29 @@ public class FormUbahPenyewa extends javax.swing.JDialog {
 
     private void jButton1simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1simpanButtonActionPerformed
         // TODO add your handling code here:
+        PenyewaDAO penyewaDAO = new PenyewaDAOImpl();
+        String idPenyewa = fieldIdPenyewa.getText().toString();
+        String namaPenyewa = fieldNamaPenyewa.getText().toString();
+        String noTelp = fieldNoTelp.getText().toString();
+        String alamat = textAreaAlamat.getText().toString();
+        
+        boolean insert = penyewaDAO.update(idPenyewa, namaPenyewa, alamat, alamat, noTelp);
+        if (insert) {
+            JOptionPane.showMessageDialog(this, "Penyewa berhasil diubah.");
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Penyewa gagal diubah.");
+        }
     }//GEN-LAST:event_jButton1simpanButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void fieldIdPenyewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdPenyewaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldIdPenyewaActionPerformed
 
     /**
      * @param args the command line arguments

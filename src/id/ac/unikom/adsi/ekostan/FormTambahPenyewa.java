@@ -209,7 +209,7 @@ public class FormTambahPenyewa extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             PenyewaDAO bk = new PenyewaDAOImpl();
-            int idPenyewa = Integer.parseInt(fieldIdPenyewa.getText().toString());
+            String idPenyewa = fieldIdPenyewa.getText().toString();
             String namaPenyewa = fieldNamaPenyewa.getText().toString();
             String jenisKelamin;
             String noTelp = fieldNoTelp.getText().toString();

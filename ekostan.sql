@@ -29,7 +29,7 @@ INSERT INTO `kamar` (`no_kamar`, `harga`, `status`) VALUES
 --
 
 CREATE TABLE `penyewa` (
-  `id_penyewa` int(20) NOT NULL,
+  `id_penyewa` varchar(20) NOT NULL,
   `nama_penyewa` varchar(30) NOT NULL,
   `jenis_kelamin` varchar(6) NOT NULL,
   `alamat` varchar(50) NOT NULL,

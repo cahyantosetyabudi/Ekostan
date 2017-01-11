@@ -10,17 +10,17 @@ package id.ac.unikom.adsi.ekostan.entity;
  * @author Zmart D3viL
  */
 public class Penyewa {
-    private Integer idPenyewa;
+    private String idPenyewa;
     private String namaPenyewa;
     private String jenisKelamin;
     private String alamat;
     private String noTelp;
 
-    public Integer getIdPenyewa() {
+    public String getIdPenyewa() {
         return idPenyewa;
     }
 
-    public void setIdPenyewa(Integer idPenyewa) {
+    public void setIdPenyewa(String idPenyewa) {
         this.idPenyewa = idPenyewa;
     }
 

@@ -58,7 +58,7 @@ public class PenyewaDAOImpl implements PenyewaDAO {
                 
                 while (result.next()) {
                     Penyewa penyewa = new Penyewa();
-                    penyewa.setIdPenyewa(result.getInt(1));
+                    penyewa.setIdPenyewa(result.getString(1));
                     penyewa.setNamaPenyewa(result.getString(2));
                     penyewa.setJenisKelamin(result.getString(3));
                     penyewa.setAlamat(result.getString(4));
@@ -85,7 +85,7 @@ public class PenyewaDAOImpl implements PenyewaDAO {
     }
 
     @Override
-    public boolean tambah(Integer idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp) {
+    public boolean tambah(String idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp) {
         String INSERT = "INSERT INTO penyewa "
                 + "(id_penyewa, nama_penyewa, jenis_kelamin, alamat, no_telp) "
                 + "VALUES (?, ?, ?, ?, ?)";
@@ -93,7 +93,7 @@ public class PenyewaDAOImpl implements PenyewaDAO {
 
         try {
             state = conn.prepareStatement(INSERT);
-            state.setInt(1, idPenyewa);
+            state.setString(1, idPenyewa);
             state.setString(2, namaPenyewa);
             state.setString(3, jenisKelamin);
             state.setString(4, alamat);
@@ -118,7 +118,7 @@ public class PenyewaDAOImpl implements PenyewaDAO {
     }
 
     @Override
-    public boolean update(Integer idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp) {
+    public boolean update(String idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp) {
         String UPDATE = "UPDATE penyewa "
                 + "SET nama_penyewa = ?, jenis_kelamin = ? , "
                 + "alamat = ?, no_telp = ? WHERE id_penyewa = ? ";
@@ -126,7 +126,7 @@ public class PenyewaDAOImpl implements PenyewaDAO {
 
         try {
             state = conn.prepareStatement(UPDATE);
-            state.setInt(5, idPenyewa);
+            state.setString(5, idPenyewa);
             state.setString(1, namaPenyewa);
             state.setString(2, jenisKelamin);
             state.setString(3, alamat);
@@ -151,13 +151,13 @@ public class PenyewaDAOImpl implements PenyewaDAO {
     }
 
     @Override
-    public boolean delete(Integer idPenyewa) {
+    public boolean delete(String idPenyewa) {
         String DELETE = "DELETE FROM penyewa WHERE id_penyewa = ?";
         PreparedStatement pst = null;
         
         try {
             pst = conn.prepareStatement(DELETE);
-            pst.setInt(1, idPenyewa);
+            pst.setString(1, idPenyewa);
 
             int qty = pst.executeUpdate();
             return qty > 0;
