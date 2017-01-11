@@ -10,6 +10,7 @@ import id.ac.unikom.adsi.ekostan.daoimpl.PenyewaDAOImpl;
 import id.ac.unikom.adsi.ekostan.entity.Penyewa;
 import id.ac.unikom.adsi.ekostan.tablemodel.PenyewaTM;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -57,6 +58,7 @@ public class FormCariPenyewa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonPilih2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAnggota = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -64,6 +66,15 @@ public class FormCariPenyewa extends javax.swing.JFrame {
         buttonPilih = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        buttonPilih1 = new javax.swing.JButton();
+        buttonPilih3 = new javax.swing.JButton();
+
+        buttonPilih2.setText("Tambah Penyewa");
+        buttonPilih2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPilih2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,10 +98,10 @@ public class FormCariPenyewa extends javax.swing.JFrame {
 
         jLabel2.setText("Cari Nama");
 
-        buttonPilih.setText("Pilih");
+        buttonPilih.setText("Hapus");
         buttonPilih.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPilihActionPerformed(evt);
+                hapusActionPerformed(evt);
             }
         });
 
@@ -104,6 +115,20 @@ public class FormCariPenyewa extends javax.swing.JFrame {
             }
         });
 
+        buttonPilih1.setText("Tambah Penyewa");
+        buttonPilih1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahPenyewaActionPerformed(evt);
+            }
+        });
+
+        buttonPilih3.setText("Ubah Penyewa");
+        buttonPilih3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPilih3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,6 +137,12 @@ public class FormCariPenyewa extends javax.swing.JFrame {
                 .addContainerGap(497, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(buttonPilih1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonPilih3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -130,7 +161,11 @@ public class FormCariPenyewa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addComponent(jButton1)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonPilih1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonPilih3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(42, 42, 42)
@@ -152,16 +187,30 @@ public class FormCariPenyewa extends javax.swing.JFrame {
     private void tablePenyewaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePenyewaMouseClicked
         int baris = tableAnggota.getSelectedRow();
         penyewa = arrayPenyewa.get(baris);
-        dispose();
     }//GEN-LAST:event_tablePenyewaMouseClicked
 
-    private void buttonPilihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihActionPerformed
+    private void hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusActionPerformed
 
         int baris = tableAnggota.getSelectedRow();
         penyewa = arrayPenyewa.get(baris);
-        dispose();
+        PenyewaDAO penyewaDAO = new PenyewaDAOImpl();
 
-    }//GEN-LAST:event_buttonPilihActionPerformed
+        if (baris >= 0) {
+            int p = JOptionPane.showConfirmDialog(this, "Anda yakin ingin "
+                    + "menghapus penyewa " + penyewa.getNamaPenyewa(), "Hapus Penyewa", JOptionPane.YES_NO_OPTION);
+            if (p == JOptionPane.YES_OPTION) {
+                boolean berhasil = penyewaDAO.delete(penyewa.getIdPenyewa());
+                if (berhasil) {
+                    JOptionPane.showMessageDialog(this, "Penyewa Berhasil Di Hapus");
+                    getData(null);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Penyewa Gagal Di Hapus");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih Penyewa Yang Akan Di Hapus");
+        }
+    }//GEN-LAST:event_hapusActionPerformed
 
     private void buttonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCariActionPerformed
         // TODO add your handling code here:
@@ -173,6 +222,21 @@ public class FormCariPenyewa extends javax.swing.JFrame {
         //Proses Pencarian
         getData(nama);
     }//GEN-LAST:event_buttonCariActionPerformed
+
+    private void tambahPenyewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahPenyewaActionPerformed
+        // TODO add your handling code here:
+        FormTambahPenyewa formTambahPenyewa = new FormTambahPenyewa();
+        formTambahPenyewa.setLocationRelativeTo(null);
+        formTambahPenyewa.setVisible(true);
+    }//GEN-LAST:event_tambahPenyewaActionPerformed
+
+    private void buttonPilih2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilih2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPilih2ActionPerformed
+
+    private void buttonPilih3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilih3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPilih3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,6 +275,9 @@ public class FormCariPenyewa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonPilih;
+    private javax.swing.JButton buttonPilih1;
+    private javax.swing.JButton buttonPilih2;
+    private javax.swing.JButton buttonPilih3;
     private javax.swing.JTextField fieldCari;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

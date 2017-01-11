@@ -15,4 +15,8 @@ import java.util.ArrayList;
 public interface PenyewaDAO {
     ArrayList<Penyewa> getPenyewa();
     ArrayList<Penyewa> getPenyewa(String namaPenyewa);
+    
+    boolean tambah(Integer idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp);
+    boolean update(Integer idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp);
+    boolean delete(Integer idPenyewa);
 }

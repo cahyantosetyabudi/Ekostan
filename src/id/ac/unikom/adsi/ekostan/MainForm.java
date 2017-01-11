@@ -361,6 +361,7 @@ public class MainForm extends javax.swing.JFrame {
     private void penyewaLabelClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_penyewaLabelClicked
         // TODO add your handling code here:
         FormCariPenyewa formCariPenyewa = new FormCariPenyewa();
+        formCariPenyewa.setLocationRelativeTo(null);
         formCariPenyewa.setVisible(true);
     }//GEN-LAST:event_penyewaLabelClicked
 

@@ -83,5 +83,87 @@ public class PenyewaDAOImpl implements PenyewaDAO {
         
         return arrayPenyewa;
     }
+
+    @Override
+    public boolean tambah(Integer idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp) {
+        String INSERT = "INSERT INTO penyewa "
+                + "(id_penyewa, nama_penyewa, jenis_kelamin, alamat, no_telp) "
+                + "VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement state = null;
+
+        try {
+            state = conn.prepareStatement(INSERT);
+            state.setInt(1, idPenyewa);
+            state.setString(2, namaPenyewa);
+            state.setString(3, jenisKelamin);
+            state.setString(4, alamat);
+            
+            int result = state.executeUpdate();
+            return result > 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PenyewaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (state != null) {
+                try {
+                    state.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PenyewaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean update(Integer idPenyewa, String namaPenyewa, String jenisKelamin, String alamat, String noTelp) {
+        String UPDATE = "UPDATE penyewa "
+                + "SET nama_penyewa = ?, jenis_kelamin = ? , "
+                + "alamat = ?, no_telp = ? WHERE id_penyewa = ? ";
+        PreparedStatement state = null;
+
+        try {
+            state = conn.prepareStatement(UPDATE);
+            state.setInt(5, idPenyewa);
+            state.setString(1, namaPenyewa);
+            state.setString(2, jenisKelamin);
+            state.setString(3, alamat);
+            state.setString(4, noTelp);            
+
+            int result = state.executeUpdate();
+            return result > 0;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PenyewaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (state != null) {
+                try {
+                    state.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PenyewaDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean delete(Integer idPenyewa) {
+        String DELETE = "DELETE FROM penyewa WHERE id_penyewa = ?";
+        PreparedStatement pst = null;
+        
+        try {
+            pst = conn.prepareStatement(DELETE);
+            pst.setInt(1, idPenyewa);
+
+            int qty = pst.executeUpdate();
+            return qty > 0;
+        } catch (SQLException e) {
+            Logger.getLogger(PenyewaDAOImpl.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return false;
+    }
     
 }
