@@ -5,6 +5,8 @@
  */
 package id.ac.unikom.adsi.ekostan;
 
+import id.ac.unikom.adsi.ekostan.entity.Pemilik;
+
 /**
  *
  * @author Zmart D3viL
@@ -338,6 +340,11 @@ public class MainForm extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Logout");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMenuClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -397,6 +404,15 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         new FormPengosongan(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void logoutMenuClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMenuClicked
+        // TODO add your handling code here:
+        Pemilik pemilik = new Pemilik();
+        FormLogin formLogin = new FormLogin();
+        formLogin.setLocationRelativeTo(null);
+        formLogin.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_logoutMenuClicked
 
     /**
      * @param args the command line arguments
