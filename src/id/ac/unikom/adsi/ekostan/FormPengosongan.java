@@ -5,6 +5,14 @@
  */
 package id.ac.unikom.adsi.ekostan;
 
+import id.ac.unikom.adsi.ekostan.utility.DatabaseConnectivity;
+import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author reyhan
@@ -13,10 +21,40 @@ public class FormPengosongan extends javax.swing.JDialog {
 
     /**
      * Creates new form FormPengosongan
+     * @param parent
+     * @param modal
      */
     public FormPengosongan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        text_no_kamar.setEnabled(true);
+        text_harga.setEnabled(false);
+        text_status.setEnabled(false);
+        tampil_tabel_kamar();
+        
+    }
+    
+    private DefaultTableModel tabmode;
+    
+    public void tampil_tabel_kamar(){
+        Object []baris = {"Nomor Kamar","Harga","Status"};
+        tabmode = new DefaultTableModel(null, baris);
+        tabel_kamar.setModel(tabmode);
+        Connection conn = DatabaseConnectivity.getConnection();
+        try {
+            String sql = "select * from kamar order by no_kamar asc";
+            java.sql.Statement stat = conn.createStatement();
+            java.sql.ResultSet hasil = stat.executeQuery(sql);
+            while (hasil.next()){
+                String no_kamar = hasil.getString("no_kamar");
+                String harga = hasil.getString("harga");
+                String status = hasil.getString("status");
+                String[] data = {no_kamar,harga,status};
+                tabmode.addRow(data);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Menampilkan data GAGAL","Informasi", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
@@ -28,21 +66,234 @@ public class FormPengosongan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        text_no_kamar = new javax.swing.JTextField();
+        text_harga = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        text_status = new javax.swing.JTextField();
+        simpan = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabel_kamar = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Pengosongan");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Form Pengosongan"));
+
+        jLabel2.setText("No. Kamar");
+
+        text_no_kamar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                text_no_kamarKeyPressed(evt);
+            }
+        });
+
+        jLabel3.setText("Harga Sewa");
+
+        jLabel7.setText("Status");
+
+        simpan.setText("Simpan");
+        simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanActionPerformed(evt);
+            }
+        });
+
+        cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel7))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(simpan)
+                        .addGap(1, 1, 1)
+                        .addComponent(cancel))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(text_harga)
+                        .addComponent(text_no_kamar, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                        .addComponent(text_status)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(text_no_kamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(text_harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(text_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(simpan)
+                    .addComponent(cancel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Tabel Data Kamar"));
+
+        tabel_kamar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabel_kamar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabel_kamarMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabel_kamar);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
+        // TODO add your handling code here:
+        Connection conn = DatabaseConnectivity.getConnection();
+        String nomor_kamar,harga,status,status1 = "Kosong";
+        nomor_kamar = text_no_kamar.getText();
+        harga = text_harga.getText();
+        status = text_status.getText();
+        int ok=JOptionPane.showConfirmDialog(null,"Apakah Anda yakin ingin mengosongkan kamar dengan nomor kamar : "+nomor_kamar+"?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+        if(ok==0){
+            String sql="update kamar set status=? where no_kamar='"+nomor_kamar+"'";
+            java.sql.PreparedStatement stat;
+            try {
+                stat = conn.prepareStatement(sql);
+                stat.setString(1, status1);
+                stat.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Pengosongan kamar berhasil!");
+                text_no_kamar.setText("");
+                text_harga.setText("");
+                text_status.setText("");
+                tampil_tabel_kamar();
+            }catch(SQLException se){
+                JOptionPane.showMessageDialog(null,"Pengosongan kamar gagal!");
+            }
+        }
+    }//GEN-LAST:event_simpanActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        // TODO add your handling code here:
+        text_no_kamar.setText("");
+        text_harga.setText("");
+        text_status.setText("");
+    }//GEN-LAST:event_cancelActionPerformed
+
+    private void tabel_kamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_kamarMouseClicked
+        // TODO add your handling code here:
+        int baris = tabel_kamar.getSelectedRow();
+        text_no_kamar.setText((String)tabel_kamar.getValueAt(baris, 0));
+        text_harga.setText((String)tabel_kamar.getValueAt(baris, 1));
+        text_status.setText((String)tabel_kamar.getValueAt(baris, 2));
+    }//GEN-LAST:event_tabel_kamarMouseClicked
+
+    private void text_no_kamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_text_no_kamarKeyPressed
+        // TODO add your handling code here:
+        String nomor_kamar = null,harga = null,status=null;
+        String cari = text_no_kamar.getText();
+        if("".equals(cari)){
+             cari="#";
+        }
+        Connection conn = DatabaseConnectivity.getConnection();
+        try{           
+            String sql="Select no_kamar,harga,status from kamar where "
+                    + "no_kamar='"+cari+"' "
+                    + "order by no_kamar asc";
+            java.sql.Statement stmt=conn.createStatement();
+            java.sql.ResultSet rslt=stmt.executeQuery(sql);
+            while(rslt.next()){
+                nomor_kamar = rslt.getString("no_kamar");
+                harga = rslt.getString("harga");
+                status = rslt.getString("status");
+            }          
+            if(nomor_kamar==null){
+                text_harga.setText("");
+                text_status.setText("");
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {     
+                    JOptionPane.showMessageDialog(null,"Data KAMAR tidak ditemukan!");
+                }
+            }else{
+                text_harga.setText(harga);
+                text_status.setText(status);
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {     
+                    JOptionPane.showMessageDialog(null,"Data KAMAR ditemukan!");
+                }
+            }
+        }catch(SQLException | HeadlessException ex){
+        }
+    }//GEN-LAST:event_text_no_kamarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -87,5 +338,18 @@ public class FormPengosongan extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton simpan;
+    private javax.swing.JTable tabel_kamar;
+    private javax.swing.JTextField text_harga;
+    private javax.swing.JTextField text_no_kamar;
+    private javax.swing.JTextField text_status;
     // End of variables declaration//GEN-END:variables
 }
